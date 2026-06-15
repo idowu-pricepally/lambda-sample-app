@@ -6,6 +6,9 @@ jobs:
     sample_app_tests:
         name: "Run Tests Using Jest"
         runs-on: ubuntu-latest
+        permissions:
+            id-token: write
+            contents: read
         defaults:
             run:
                 working-directory: sample-app-tut
