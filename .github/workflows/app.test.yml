@@ -10,7 +10,7 @@ jobs:
             run:
                 working-directory: ./sample-app-tut
         steps:
-            - uses: actions/checkout@4
+            - uses: actions/checkout@6
             - run: npm install
             - run: npm test
             
