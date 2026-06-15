@@ -1,14 +1,12 @@
-output "lambda_test_role_arn" {
-  description = "The ARN of the IAM role for testing"
-  value       = module.iam_roles.lambda_test_role_arn
+output "arn" {
+  description = "The Amazon Resource Name (ARN) specifying the OIDC provider"
+  value       = module.github_oidc_iam_role.arn
 }
 
-output "lambda_deploy_plan_role_arn" {
-  description = "The ARN of the IAM role for plan"
-  value       = module.iam_roles.lambda_deploy_plan_role_arn
-}
-
-output "lambda_deploy_apply_role_arn" {
-  description = "The ARN of the IAM role for apply"
-  value       = module.iam_roles.lambda_deploy_apply_role_arn
+################################################################################
+# OIDC Provider
+################################################################################
+output "url" {
+  description = "The URL of the identity provider. Corresponds to the iss claim"
+  value       = module.github_oidc_iam_provider.url
 }

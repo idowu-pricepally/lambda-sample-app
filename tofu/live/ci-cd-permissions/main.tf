@@ -1,21 +1,50 @@
 provider "aws" {
-  region = "us-east-2"
+  region = "eu-west-1"
 }
 
-module "oidc_provider" {
-  source = "../../modules/github-aws-oidc"
+locals {
+  name = "ex-${basename(path.cwd)}"
 
-  provider_url = "https://token.actions.githubusercontent.com"
+  tags = {
+    Example    = local.name
+    GithubRepo = "lambda-sample-app"
+    GithubOrg  = "idowu-pricepally"
+  }
 }
 
-module "iam_roles" {
-  source = "../../modules/gh-actions-iam-roles"
+################################################################################
+# OIDC Provider
+# Note: This is one provider URL per AWS account
+################################################################################
 
-  name              = "lambda-sample"
-  oidc_provider_arn = module.oidc_provider.oidc_provider_arn
+module "github_oidc_iam_provider" {
+  source = "../../modules/iam-oidc-provider"
 
-  enable_iam_role_for_apply = true
+  tags = local.tags
+}
 
-  github_repo      = "idowu-pricepally/sample-app-tut"
-  lambda_base_name = "lambda-sample"
+
+################################################################################
+# GitHub OIDC IAM Role
+################################################################################
+
+module "github_oidc_iam_role" {
+  source = "../../modules/iam-role"
+
+  name = local.name
+
+  enable_github_oidc = true
+
+  # This should be updated to suit your organization, repository, references/branches, etc.
+  oidc_subjects = [
+    # You can prepend with `repo:` but it is not required
+    "repo:idowu-pricepally/lambda-sample-app:pull_request",
+    "repo:idowu-pricepally/lambda-sample-app:ref:refs/heads/main",
+  ]
+
+  policies = {
+    S3ReadOnly = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
+  }
+
+  tags = local.tags
 }
