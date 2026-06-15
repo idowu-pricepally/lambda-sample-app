@@ -24,3 +24,13 @@ jobs:
                 role-session-name: apply-${{ github.run_number }}-${{ github.actor }}
                 aws-region: us-east-2
             
+            - uses: opentofu/setup-opentofu@v1  #5
+
+            - name: Tofu Test
+              env:
+                TF_VAR_name: lambda-sample-${{ github.run_id }} #6
+              working-directory: ./tofu/live/ci-cd-permissions #7
+              run: |
+                tofu init -backend=false -input=false
+                tofu test -verbose
+            
