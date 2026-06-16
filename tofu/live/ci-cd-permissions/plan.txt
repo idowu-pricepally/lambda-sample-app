@@ -5,30 +5,6 @@ plan. Resource actions are indicated with the following symbols:
 
 OpenTofu will perform the following actions:
 
-  # module.github_oidc_iam_provider.aws_iam_openid_connect_provider.this[0] will be created
-  + resource "aws_iam_openid_connect_provider" "this" {
-      + arn             = (known after apply)
-      + client_id_list  = [
-          + "sts.amazonaws.com",
-        ]
-      + id              = (known after apply)
-      + tags            = {
-          + "Example"    = "ex-ci-cd-permissions"
-          + "GithubOrg"  = "idowu-pricepally"
-          + "GithubRepo" = "lambda-sample-app"
-        }
-      + tags_all        = {
-          + "Example"    = "ex-ci-cd-permissions"
-          + "GithubOrg"  = "idowu-pricepally"
-          + "GithubRepo" = "lambda-sample-app"
-        }
-      + thumbprint_list = [
-          + "22ff89586561fc2d52f77491e9f1eff1b80be33e",
-          + "9514f4ed3c841c96c43def0f0acbf177405ded12",
-        ]
-      + url             = "https://token.actions.githubusercontent.com"
-    }
-
   # module.github_oidc_iam_role.aws_iam_role.this[0] will be created
   + resource "aws_iam_role" "this" {
       + arn                   = (known after apply)
@@ -92,8 +68,7 @@ OpenTofu will perform the following actions:
       + role       = (known after apply)
     }
 
-Plan: 3 to add, 0 to change, 0 to destroy.
+Plan: 2 to add, 0 to change, 0 to destroy.
 
 Changes to Outputs:
   + arn = (known after apply)
-  + url = "https://token.actions.githubusercontent.com"
