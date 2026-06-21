@@ -1,4 +1,30 @@
 
+Note: Objects have changed outside of OpenTofu
+
+OpenTofu detected the following changes made outside of OpenTofu since the
+last "tofu apply" which may have affected this plan:
+
+  # module.github_oidc_iam_role.aws_iam_role.this[0] has been deleted
+  - resource "aws_iam_role" "this" {
+      - arn                   = "arn:aws:iam::157320905197:role/ex-ci-cd-permissions-20260616173709704800000001" -> null
+        id                    = "ex-ci-cd-permissions-20260616173709704800000001"
+      - name                  = "ex-ci-cd-permissions-20260616173709704800000001" -> null
+        tags                  = {
+            "Example"    = "ex-ci-cd-permissions"
+            "GithubOrg"  = "idowu-pricepally"
+            "GithubRepo" = "lambda-sample-app"
+        }
+      - unique_id             = "AROASJIIOQHW45LHMRREX" -> null
+        # (8 unchanged attributes hidden)
+    }
+
+
+Unless you have made equivalent changes to your configuration, or ignored the
+relevant attributes using ignore_changes, the following plan may include
+actions to undo or respond to these changes.
+
+─────────────────────────────────────────────────────────────────────────────
+
 OpenTofu used the selected providers to generate the following execution
 plan. Resource actions are indicated with the following symbols:
   + create
@@ -71,4 +97,4 @@ OpenTofu will perform the following actions:
 Plan: 2 to add, 0 to change, 0 to destroy.
 
 Changes to Outputs:
-  + arn = (known after apply)
+  ~ arn = "arn:aws:iam::157320905197:role/ex-ci-cd-permissions-20260616173709704800000001" -> (known after apply)
