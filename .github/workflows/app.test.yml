@@ -17,7 +17,7 @@ jobs:
             - run: npm install
             - run: npm test
 
-            - uses: aws-actions/configure-aws-credentials@v3
+            - uses: aws-actions/configure-aws-credentials@v6
               if: github.ref == 'refs/heads/main'
               with:
                 role-to-assume: arn:aws:iam::157320905197:role/ex-ci-cd-permissions-20260621150958241100000001 #3 Assume the apply IAM role (main branch only).
